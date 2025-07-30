@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/services/local_auth_service.dart';
+import 'package:news_app/services/news_service.dart';
 import 'package:news_app/views/login_screen.dart';
 import 'package:news_app/views/register_screen.dart';
 import 'package:news_app/views/forgot_password_screen.dart';
@@ -9,14 +10,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final authService = await LocalAuthService.create();
+  final newsService = NewsService();
 
-  runApp(MyApp(authService: authService));
+  runApp(MyApp(authService: authService, newsService: newsService));
 }
 
 class MyApp extends StatelessWidget {
   final LocalAuthService authService;
+  final NewsService newsService;
 
-  const MyApp({super.key, required this.authService});
+  const MyApp({
+    super.key,
+    required this.authService,
+    required this.newsService,
+  });
 
   @override
   Widget build(BuildContext context) {
